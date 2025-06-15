@@ -2,12 +2,12 @@
   "name": "nfl-public-api",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "api/index.ts",
   "scripts": {
-    "start": "node --loader ts-node/esm src/index.ts",
-    "dev": "nodemon --exec node --loader ts-node/esm src/index.ts",
+    "start": "node --loader ts-node/esm api/index.ts",
+    "dev": "nodemon --exec node --loader ts-node/esm api/index.ts",
     "build": "tsc",
-    "serve": "node dist/index.js",
+    "serve": "node dist/api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -32,7 +32,7 @@
     "nodemon": "^3.1.10"
   },
   "engines": {
-    "node": "23.x",
+    "node": "22.x",
     "pnpm": "10.x"
   }
 }

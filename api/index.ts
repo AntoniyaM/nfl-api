@@ -1,7 +1,7 @@
 import express from 'express'
-import teamRoutes from './routes/teams.ts'
-import playerRoutes from './routes/players.ts'
-import { serve, setup } from './swagger.ts'
+import teamRoutes from '../src/routes/teams.js'
+import playerRoutes from '../src/routes/players.js'
+import { serve, setup } from '../src/swagger.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000

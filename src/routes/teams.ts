@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express'
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
-import db from '../firebase.ts'
+import db from '../firebase.js'
 
 const router = Router()
 
