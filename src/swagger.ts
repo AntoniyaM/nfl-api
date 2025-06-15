@@ -148,9 +148,20 @@ const options = {
       }
     }
   },
-  apis: ['./src/routes/*.ts'],
+  apis: ['src/routes/*.js'],
 }
+
+// Vercel cannot resolve Swagger UI assets.
+const customCss =
+  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.24.0/swagger-ui.min.css'
+const customJs = [
+  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.24.0/swagger-ui-bundle.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.24.0/swagger-ui-standalone-preset.js',
+];
 
 export const specs = swaggerJsdoc(options)
 export const serve = swaggerUi.serve
-export const setup = swaggerUi.setup(specs)
+export const setup = swaggerUi.setup(specs, {
+  customCssUrl: customCss,
+  customJs,
+})
