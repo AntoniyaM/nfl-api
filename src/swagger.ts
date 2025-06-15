@@ -148,7 +148,7 @@ const options = {
       }
     }
   },
-  apis: ['src/routes/*.js'],
+  apis: ['src/routes/*.js', 'src/routes/*.ts'],
 }
 
 // Vercel cannot resolve Swagger UI assets.
