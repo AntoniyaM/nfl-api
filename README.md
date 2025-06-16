@@ -4,7 +4,7 @@ A public API for NFL teams and players information I developed for my personal a
 
 ## Overview
 
-This API provides access to NFL teams and active players data stored in Firebase. See the [Swagger docs](http://localhost:3000/) for detailed information on the available endpoints.
+This API provides access to NFL teams and active players data stored in Firebase. See the [Swagger docs](https://nfl-api-kappa.vercel.app/) for detailed information on the available endpoints.
 
 ## Tech Stack
 
