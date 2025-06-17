@@ -163,5 +163,5 @@ export const specs = swaggerJsdoc(options)
 export const serve = swaggerUi.serve
 export const setup = swaggerUi.setup(specs, {
   customCssUrl: customCss,
-  customJs,
+  customSiteTitle: 'NFL Public API Docs 🏈',
 })
