@@ -144,6 +144,53 @@ const options = {
               description: 'Error message'
             }
           }
+        },
+        Conference: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+              description: 'Conference identifier'
+            },
+            name: {
+              type: 'string',
+              description: 'Conference name (e.g., "American Football Conference")'
+            },
+            abbreviation: {
+              type: 'string',
+              description: 'Conference abbreviation (e.g., "AFC")'
+            },
+            divisions: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  id: {
+                    type: 'string',
+                    description: 'Division identifier'
+                  },
+                  name: {
+                    type: 'string',
+                    description: 'Division name (e.g., "AFC East")'
+                  }
+                }
+              },
+              description: 'Divisions within the conference'
+            }
+          }
+        },
+        PositionType: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+              description: 'Position type identifier'
+            },
+            name: {
+              type: 'string',
+              description: 'Position type name (e.g., "Offense", "Defense", "Special Teams")'
+            },
+          }
         }
       }
     }

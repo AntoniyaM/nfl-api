@@ -23,5 +23,13 @@ This API provides access to NFL teams and active players data stored in Firebase
 
 ### Players
 
-- `GET /api/players` - Get all NFL players
+- `GET /api/players` - Get all NFL players (active players only)
 - `GET /api/players/{id}` - Get a specific player by ID
+
+### Conferences
+
+- `GET /api/conferences` - Get NFL conferences (AFC and NFC)
+
+### Position Types
+
+- `GET /api/position-types` - Get player position types (e.g. offense, special team, defense)
