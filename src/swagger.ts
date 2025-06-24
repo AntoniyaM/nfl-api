@@ -211,4 +211,5 @@ export const serve = swaggerUi.serve
 export const setup = swaggerUi.setup(specs, {
   customCssUrl: customCss,
   customSiteTitle: 'NFL Public API Docs 🏈',
+  customfavIcon: '/public/nfl-stats-favicon.png',
 })

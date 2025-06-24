@@ -9,6 +9,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 app.use(express.json())
+app.use('/public', express.static('public'));
 
 app.use('/api', teamRoutes)
 app.use('/api', playerRoutes)
