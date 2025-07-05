@@ -45,7 +45,12 @@ const playersCollection = collection(db, 'players')
  */
 router.get('/players', async (req: Request, res: Response) => {
   const players = await getDocs(playersCollection)
-  res.json(players.docs.map((doc) => doc.data()))
+  res.json(players.docs.map((doc) => {
+    return {
+      id: doc.id,
+      ...doc.data(),
+    }
+  }))
 })
 
 /**

@@ -33,7 +33,12 @@ const conferencesCollection = collection(db, 'conferences')
 router.get('/conferences', async (req: Request, res: Response) => {
   try {
     const conferences = await getDocs(conferencesCollection)
-    res.json(conferences.docs.map((doc) => doc.data()))
+    res.json(conferences.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      }
+    }))
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve conferences.' })
   }

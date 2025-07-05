@@ -32,7 +32,12 @@ const positionTypesCollection = collection(db, 'positionTypes')
 router.get('/position-types', async (req: Request, res: Response) => {
   try {
     const positionTypes = await getDocs(positionTypesCollection)
-    res.json(positionTypes.docs.map((doc) => doc.data()))
+    res.json(positionTypes.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      }
+    }))
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve position types.' })
   }
