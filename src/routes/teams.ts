@@ -88,4 +88,54 @@ router.get('/teams/:id', async (req: Request, res: Response) => {
   res.json(teamDoc.data())
 })
 
+/**
+ * @swagger
+ * /teams/division/{divisionId}:
+ *   get:
+ *     summary: Retrieves teams by division ID
+ *     description: Returns a list of NFL teams belonging to a specific division
+ *     tags: [Teams]
+ *     parameters:
+ *       - in: path
+ *         name: divisionId
+ *         required: true
+ *         description: Unique identifier of the division
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: List of teams in the specified division
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Team'
+ *       404:
+ *         description: No teams found in the specified division
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
+router.get('/teams/division/:divisionId', async (req: Request, res: Response) => {
+  const divisionId = req.params.divisionId
+
+  try {
+    const teams = await getDocs(teamsCollection)
+    const divisionTeams = teams.docs
+      .filter(team => team.data().division === divisionId)
+      .map(doc => ({ id: doc.id, ...doc.data() }))
+
+    if (divisionTeams.length === 0) {
+      res.status(404).json({ error: 'No teams found in this division.' })
+      return
+    }
+
+    res.json(divisionTeams)
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve teams by division.' })
+  }
+})
+
 export default router
