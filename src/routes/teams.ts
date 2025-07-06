@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express'
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
 import db from '../firebase.js'
 
 const router = Router()
@@ -122,15 +122,23 @@ router.get('/teams/division/:divisionId', async (req: Request, res: Response) =>
   const divisionId = req.params.divisionId
 
   try {
-    const teams = await getDocs(teamsCollection)
-    const divisionTeams = teams.docs
-      .filter(team => team.data().division === divisionId)
-      .map(doc => ({ id: doc.id, ...doc.data() }))
+    // Create a Firebase query against the teams collection for the specific division
+    const divisionTeamsQuery = query(
+      teamsCollection,
+      where('division', '==', divisionId)
+    )
 
-    if (divisionTeams.length === 0) {
+    const divisionTeamsResult = await getDocs(divisionTeamsQuery)
+
+    if (divisionTeamsResult.empty) {
       res.status(404).json({ error: 'No teams found in this division.' })
       return
     }
+
+    const divisionTeams = divisionTeamsResult.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }))
 
     res.json(divisionTeams)
   } catch (error) {

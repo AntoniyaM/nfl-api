@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express'
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
 import db from '../firebase.js'
 
 const router = Router()
@@ -92,6 +92,64 @@ router.get('/players/:id', async (req: Request, res: Response) => {
   }
 
   res.json(playerDoc.data())
+})
+
+/**
+ * @swagger
+ * /players/team/{teamId}:
+ *   get:
+ *     summary: Retrieves all NFL players for a specific team
+ *     description: Returns a list of NFL players that play for the specified team ID
+ *     tags: [Players]
+ *     parameters:
+ *       - in: path
+ *         name: teamId
+ *         required: true
+ *         description: Unique identifier of the team
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: A list of players from the specified team
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Player'
+ *       404:
+ *         description: No players found for the specified team
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
+router.get('/players/team/:teamId', async (req: Request, res: Response) => {
+  const teamId = req.params.teamId
+
+  try {
+    // Create a Firebase query against the players collection for the specific team.
+    const teamPlayersQuery = query(
+      playersCollection,
+      where('team', '==', teamId)
+    )
+
+    const teamPlayersResult = await getDocs(teamPlayersQuery)
+
+    if (teamPlayersResult.empty) {
+      res.status(404).json({ error: 'No players found for this team.' })
+      return
+    }
+
+    const teamPlayers = teamPlayersResult.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }))
+
+    res.json(teamPlayers)
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve players by team.' })
+  }
 })
 
 export default router
