@@ -7,7 +7,6 @@ const router = Router()
 interface PositionType {
   id: string
   name: string
-  positions: string[]
 }
 
 const positionTypesCollection = collection(db, 'positionTypes')

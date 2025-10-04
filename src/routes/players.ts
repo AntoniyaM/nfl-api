@@ -10,18 +10,31 @@ interface Player {
   lastName: string
   fullName: string
   age: number
-  height: number
-  weight: number
-  slug: string
-  jersey: string
-  headshotUrl: string
+  birthPlace: {
+    city: string
+    state: string
+    country: string
+  }
   dateOfBirth: string
-  birthPlace: string
-  experience: number
-  positionType: string
-  position: string
+  displayHeight: string
+  displayWeight: string
+  experience: {
+    years: number
+  }
+  headshot: {
+    alt: string
+    href: string
+  }
+  height: number
+  jersey: string
+  position: {
+    name: string
+    type: string
+  }
+  slug: string
   status: string
   team: string
+  weight: number
 }
 
 const playersCollection = collection(db, 'players')

@@ -36,6 +36,10 @@ const options = {
               type: 'string',
               description: 'Team division'
             },
+            conference: {
+              type: 'string',
+              description: 'Conference the team belongs to'
+            },
             established: {
               type: 'integer',
               description: 'Year the team was established'
@@ -62,6 +66,14 @@ const options = {
                 type: 'string'
               },
               description: 'Team owners'
+            },
+            seasonSummary: {
+              type: 'string',
+              description: 'Summary of the team\'s current season'
+            },
+            standingSummary: {
+              type: 'string',
+              description: 'Summary of the team\'s current division standing'
             },
             websiteUrl: {
               type: 'string',
@@ -92,6 +104,36 @@ const options = {
               type: 'integer',
               description: 'Player\'s age'
             },
+            birthPlace: {
+              type: 'object',
+              properties: {
+                city: {
+                  type: 'string',
+                  description: 'City where the player was born'
+                },
+                state: {
+                  type: 'string',
+                  description: 'State where the player was born'
+                },
+                country: {
+                  type: 'string',
+                  description: 'Country where the player was born'
+                }
+              },
+              description: 'Player\'s place of birth'
+            },
+            dateOfBirth: {
+              type: 'string',
+              description: 'Player\'s date of birth'
+            },
+            displayHeight: {
+              type: 'string',
+              description: 'Player\'s height in a formatted display string'
+            },
+            displayWeight: {
+              type: 'string',
+              description: 'Player\'s weight in a formatted display string'
+            },
             height: {
               type: 'integer',
               description: 'Player\'s height in inches'
@@ -108,27 +150,48 @@ const options = {
               type: 'string',
               description: 'Player\'s jersey number'
             },
-            headshotUrl: {
-              type: 'string',
-              format: 'url',
-              description: 'URL to player\'s headshot image'
+            headshot: {
+              type: 'object',
+              properties: {
+                alt: {
+                  type: 'string',
+                  description: 'Alternative text for the headshot image'
+                },
+                href: {
+                  type: 'string',
+                  format: 'url',
+                  description: 'URL to player\'s headshot image'
+                }
+              },
+              description: 'Player\'s headshot image information'
             },
             team: {
               type: 'string',
               description: 'Identifier for the team the player belongs to (e.g., \'arizona_cardinals\')'
             },
             experience: {
-              type: 'integer',
-              description: 'Years of experience in the league'
-            },
-            positionType: {
-              type: 'string',
-              enum: ['offense', 'defense', 'specialTeam'],
-              description: 'General position type'
+              type: 'object',
+              properties: {
+                years: {
+                  type: 'integer',
+                  description: 'Number of years of experience in the league'
+                }
+              },
+              description: 'Player\'s NFL experience'
             },
             position: {
-              type: 'string',
-              description: 'Specific position of the player (e.g., \'Guard\', \'QB\')'
+              type: 'object',
+              properties: {
+                name: {
+                  type: 'string',
+                  description: 'Specific position name of the player (e.g., \'Quarterback\', \'Guard\')'
+                },
+                type: {
+                  type: 'string',
+                  description: 'Type of the position (e.g., \'Offense\', \'Defense\', \'Special Teams\')'
+                }
+              },
+              description: 'Player\'s position details'
             },
             status: {
               type: 'string',

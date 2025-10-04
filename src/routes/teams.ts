@@ -8,6 +8,7 @@ interface Team {
   id: string
   abbreviation: string
   color: string
+  conference: string
   division: string
   established: number
   headCoach: string
@@ -15,6 +16,8 @@ interface Team {
   logoUrl: string
   name: string
   owners: string[]
+  seasonSummary: string
+  standingSummary: string
   websiteUrl: string
 }
 
