@@ -96,7 +96,7 @@ router.get('/players', async (req: Request, res: Response) => {
  */
 router.get('/players/:id', async (req: Request, res: Response) => {
   const playerId = req.params.id
-  const playerRef = doc(db, 'teams', playerId)
+  const playerRef = doc(db, 'players', playerId)
   const playerDoc = await getDoc(playerRef)
 
   if (!playerDoc.exists()) {
