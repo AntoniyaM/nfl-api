@@ -4,6 +4,7 @@ import teamRoutes from '../src/routes/teams.js'
 import playerRoutes from '../src/routes/players.js'
 import conferenceRoutes from '../src/routes/conferences.js'
 import positionTypeRoutes from '../src/routes/positionTypes.js'
+import scheduleRoute from '../src/routes/schedule.js'
 import { serve, setup } from '../src/swagger.js'
 
 const app = express()
@@ -24,6 +25,7 @@ app.use('/api', teamRoutes)
 app.use('/api', playerRoutes)
 app.use('/api', conferenceRoutes)
 app.use('/api', positionTypeRoutes)
+app.use('/api', scheduleRoute)
 
 // Swagger docs.
 app.use('/', serve, setup)

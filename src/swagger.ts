@@ -7,7 +7,7 @@ const options = {
     info: {
       title: 'NFL Public API 🏈',
       version: '1.0.0',
-      description: 'A WIP public API for NFL teams & players information for my personal apps.',
+      description: 'A WIP public API for NFL games, teams & players information for my personal apps.',
     },
     servers: [
       {
@@ -253,6 +253,86 @@ const options = {
               type: 'string',
               description: 'Position type name (e.g., "Offense", "Defense", "Special Teams")'
             },
+          }
+        },
+        TeamLogo: {
+          type: 'object',
+          properties: {
+            alt: {
+              type: 'string',
+              description: 'Alternative text for the team logo'
+            },
+            url: {
+              type: 'string',
+              format: 'url',
+              description: 'URL to the team logo'
+            }
+          }
+        },
+        Competitor: {
+          type: 'object',
+          properties: {
+            score: {
+              type: 'integer',
+              description: 'The team\'s score in the game'
+            },
+            teamLogo: {
+              $ref: '#/components/schemas/TeamLogo',
+              description: 'Team logo information'
+            },
+            winner: {
+              type: 'boolean',
+              description: 'Whether this team won the game'
+            }
+          }
+        },
+        Event: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+              description: 'Event identifier'
+            },
+            competitors: {
+              type: 'array',
+              items: {
+                $ref: '#/components/schemas/Competitor'
+              },
+              description: 'Array of competing teams (2 teams)'
+            },
+            completed: {
+              type: 'boolean',
+              description: 'Whether the game has been completed'
+            },
+            date: {
+              type: 'string',
+              format: 'date-time',
+              description: 'Date and time of the event'
+            },
+            name: {
+              type: 'string',
+              description: 'Name of the event'
+            }
+          }
+        },
+        Schedule: {
+          type: 'object',
+          properties: {
+            events: {
+              type: 'array',
+              items: {
+                $ref: '#/components/schemas/Event'
+              },
+              description: 'List of scheduled games for the week'
+            },
+            season: {
+              type: 'integer',
+              description: 'The season year'
+            },
+            week: {
+              type: 'integer',
+              description: 'The week number of the season'
+            }
           }
         }
       }
