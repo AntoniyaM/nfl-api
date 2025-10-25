@@ -61,7 +61,7 @@ router.get('/schedule', async (req: Request, res: Response) => {
     const events = (schedule.docs[0]?.data()?.events as Event[])?.map(event => {
       return {
         ...event,
-        date: new Date(event.date.seconds).toISOString(),
+        date: new Date(event.date.seconds * 1000),
       }
     }) || []
 
